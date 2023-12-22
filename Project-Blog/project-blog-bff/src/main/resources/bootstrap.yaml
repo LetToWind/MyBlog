@@ -1,0 +1,23 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: blog-bff
+  cloud:
+    nacos:
+      server-addr: 43.136.80.151:8848
+      # Nacos 注册中心
+      discovery:
+        enabled: true
+        namespace: register-dev
+        group: DEFAULT_GROUP
+        register-enabled: true
+      config:
+        enabled: true
+        file-extension: yaml
+        namespace: dev
+        group: DEFAULT_GROUP
+        extension-configs[0]:
+          data-id: blog-bff.yaml
+          group: DEFAULT_GROUP
+          refresh: true
