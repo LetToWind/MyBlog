@@ -128,6 +128,7 @@
             <version>RELEASE</version>
             <scope>compile</scope>
         </dependency>
+
 <!--        测试用-依赖      -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -177,19 +178,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>${spring-boot.version}</version>
                 <configuration>
-                    <mainClass>com.runes.ProjectBlogBffApplication</mainClass>
-                    <skip>true</skip>
+                    <excludes>
+                        <exclude>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </exclude>
+                    </excludes>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>repackage</id>
-                        <goals>
-                            <goal>repackage</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 <!--            lombok、mapstruct、querydsl 编译顺序整合插件-->
             <plugin>
@@ -228,20 +224,9 @@
                             <version>${jakarta-persistence.version}</version>
                         </path>
                     </annotationProcessorPaths>
-                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    <repositories>
-        <repository>
-            <id>spring-milestones</id>
-            <name>Spring Milestones</name>
-            <url>https://repo.spring.io/milestone</url>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
 
 </project>
