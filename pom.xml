@@ -11,6 +11,12 @@
 	<groupId>com.ltw</groupId>
 	<artifactId>MyBlog</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+	<modules>
+		<module>blog-interface</module>
+		<module>blog-service</module>
+		<module>common</module>
+	</modules>
 	<name>MyBlog</name>
 	<description>MyBlog</description>
 	<properties>
