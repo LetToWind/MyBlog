@@ -3,8 +3,11 @@ package com.ltw.blogservice.dao.mapper;
 import com.ltw.blogservice.dao.dto.Comment;
 import com.ltw.blogservice.dao.dto.CommentExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface CommentMapper {
     long countByExample(CommentExample example);
 

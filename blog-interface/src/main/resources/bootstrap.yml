@@ -1,0 +1,16 @@
+
+spring:
+  cloud:
+    nacos:
+      server-addr: 127.0.0.1:8848
+      config:
+        namespace: public
+        group: DEFAULT_GROUP
+        file-extension: yml
+        prefix: test
+      discovery:
+        enabled: true
+        namespace: public
+        group: DEFAULT_GROUP
+  application:
+    name: blog-interface

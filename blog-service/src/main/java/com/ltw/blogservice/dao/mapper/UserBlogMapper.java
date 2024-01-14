@@ -3,8 +3,11 @@ package com.ltw.blogservice.dao.mapper;
 import com.ltw.blogservice.dao.dto.UserBlog;
 import com.ltw.blogservice.dao.dto.UserBlogExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface UserBlogMapper {
     long countByExample(UserBlogExample example);
 

@@ -31,4 +31,8 @@ public class Result<T> {
         return new Result(SUCCESS, "success", null);
     }
 
+    public static Result success(Object data){
+        return new Result(SUCCESS, "success", data);
+    }
+
 }
