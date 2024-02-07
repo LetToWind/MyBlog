@@ -1,6 +1,6 @@
 package com.ltw.myblog.controller;
 
-import com.ltw.common.dto.Result;
+import com.ltw.common.web.dto.Result;
 import com.ltw.myblog.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

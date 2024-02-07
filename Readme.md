@@ -7,19 +7,15 @@
 ## 项目结构
 
 ```
-├── README.md
-├── build.gradle
-├── gradle
-│   └── wrapper
-│       ├── gradle-wrapper.jar
-│       └── gradle-wrapper.properties
-├── gradlew
-├── gradlew.bat
-├── libs
-│   └── jdk-8u131-linux-x64.tar.gz
 
 
 
 目前项目还在持续开发中~~
 
 首先先把数据库给接通吧
+
+先构思一下代码分块，首先对接前端的唯一服务是blog-interface，可以考虑做成gateway
+在其下分不同的模块处理各自的业务
+blog-service负责主体功能，如查询，编写博客，发布，评论等
+blog-user负责用户相关信息的认证，认证完成后返回token给前端，使用户拥有访问权限
+blog-back-service负责管理员相关事务如对各类信息的监控，增删改等。
