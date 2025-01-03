@@ -5,7 +5,8 @@
 
 <generatorConfiguration>
     <properties resource="mybatis-generator.properties"/>
-    <context id="MySqlContext" targetRuntime="MyBatis3" defaultModelType="flat">
+<!--    mybatis3和mybatis3simple的区别，一个会生成简单查询，另一个会生成qbc风格查询-->
+    <context id="MySqlContext" targetRuntime="MyBatis3Simple" defaultModelType="flat">
         <property name="beginningDelimiter" value="`"/>
         <property name="endingDelimiter" value="`"/>
         <property name="javaFileEncoding" value="UTF-8"/>
@@ -13,6 +14,7 @@
         <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
         <!-- 为生成的Java模型创建一个toString方法 -->
         <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <plugin type="org.mybatis.generator.plugins.UnmergeableXmlMappersPlugin" />
         <!--可以自定义生成model的代码注释-->
         <commentGenerator type="com.ltw.common.generator.CommentGenerator">
             <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
@@ -38,6 +40,7 @@
         <!--生成全部表tableName设为%-->
 <!--        目前暂未发现能完全自动生成的写法  发现若依已经可以完整生成三层架构的简单操作  所以不再纠结  之后换另一套自动生成器-->
         <table tableName="t_role" domainObjectName="Role">
+
         </table>
         <table tableName="t_user" domainObjectName="User">
         </table>

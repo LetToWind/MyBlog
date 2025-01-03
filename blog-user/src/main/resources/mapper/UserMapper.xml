@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ltw.user.dao.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.ltw.user.dao.dto.User">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="login_name" jdbcType="VARCHAR" property="loginName" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="avatar" jdbcType="VARCHAR" property="avatar" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="salt" jdbcType="VARCHAR" property="salt" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ltw.user.dao.dto.User">
+    insert into t_user (id, login_name, username, 
+      password, avatar, email, 
+      phone, role_id, salt, 
+      create_time, create_by, update_time, 
+      update_by)
+    values (#{id,jdbcType=INTEGER}, #{loginName,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, 
+      #{phone,jdbcType=VARCHAR}, #{roleId,jdbcType=INTEGER}, #{salt,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ltw.user.dao.dto.User">
+    update t_user
+    set login_name = #{loginName,jdbcType=VARCHAR},
+      username = #{username,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=INTEGER},
+      salt = #{salt,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, login_name, username, password, avatar, email, phone, role_id, salt, create_time, 
+    create_by, update_time, update_by
+    from t_user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, login_name, username, password, avatar, email, phone, role_id, salt, create_time, 
+    create_by, update_time, update_by
+    from t_user
+  </select>
+  <select id="selectByUsername" parameterType="String" resultType="com.ltw.user.dao.dto.User">
+    select id, login_name, username, password, avatar, email, phone, role_id, salt
+    from t_user
+    where username = #{username,jdbcType=VARCHAR} limit 1
+  </select>
+</mapper>

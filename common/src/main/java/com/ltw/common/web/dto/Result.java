@@ -29,8 +29,16 @@ public class Result<T> {
         return new Result(SUCCESS, "success", null);
     }
 
-    public static Result success(Object data){
-        return new Result(SUCCESS, "success", data);
+    public static Result success(String msg){
+        return new Result(SUCCESS, msg, null);
+    }
+
+    public static Result fail(){
+        return new Result(FAIL, "fail", null);
+    }
+
+    public static Result fail(String msg){
+        return new Result(FAIL, msg, null);
     }
 
 }

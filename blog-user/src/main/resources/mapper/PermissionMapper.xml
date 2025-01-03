@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ltw.user.dao.mapper.PermissionMapper">
+  <resultMap id="BaseResultMap" type="com.ltw.user.dao.dto.Permission">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="permission_name" jdbcType="VARCHAR" property="permissionName" />
+    <result column="permission_desc" jdbcType="VARCHAR" property="permissionDesc" />
+    <result column="role_id" jdbcType="INTEGER" property="roleId" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="create_by" jdbcType="VARCHAR" property="createBy" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="update_by" jdbcType="VARCHAR" property="updateBy" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from t_permission
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.ltw.user.dao.dto.Permission">
+    insert into t_permission (id, permission_name, permission_desc, 
+      role_id, create_time, create_by, 
+      update_time, update_by)
+    values (#{id,jdbcType=INTEGER}, #{permissionName,jdbcType=VARCHAR}, #{permissionDesc,jdbcType=VARCHAR}, 
+      #{roleId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{createBy,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.ltw.user.dao.dto.Permission">
+    update t_permission
+    set permission_name = #{permissionName,jdbcType=VARCHAR},
+      permission_desc = #{permissionDesc,jdbcType=VARCHAR},
+      role_id = #{roleId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_by = #{createBy,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      update_by = #{updateBy,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, permission_name, permission_desc, role_id, create_time, create_by, update_time, 
+    update_by
+    from t_permission
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select id, permission_name, permission_desc, role_id, create_time, create_by, update_time, 
+    update_by
+    from t_permission
+  </select>
+</mapper>
