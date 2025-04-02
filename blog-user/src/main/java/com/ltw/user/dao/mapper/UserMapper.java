@@ -2,24 +2,24 @@ package com.ltw.user.dao.mapper;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.ltw.user.dao.dto.User;
+import com.ltw.user.dao.dto.BlogUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface UserMapper extends BaseMapper<User> {
+public interface UserMapper extends BaseMapper<BlogUser> {
     int deleteByPrimaryKey(Long id);
 
-    int insert(User row);
+    int insert(BlogUser row);
 
-    User selectByPrimaryKey(Long id);
+    BlogUser selectByPrimaryKey(Long id);
 
-    List<User> selectAll();
+    List<BlogUser> selectAll();
 
-    int updateByPrimaryKey(User row);
+    int updateByPrimaryKey(BlogUser row);
 
-    User selectByUsername(String username);
+    BlogUser selectByUsername(String username);
 
 
-    int updatePhoneByWrapper(@Param("ew")LambdaQueryWrapper<User> wrapper,@Param("phone") String phone);
+    int updatePhoneByWrapper(@Param("ew")LambdaQueryWrapper<BlogUser> wrapper, @Param("phone") String phone);
 }

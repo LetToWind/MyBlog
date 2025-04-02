@@ -116,6 +116,19 @@
 				<artifactId>hutool-all</artifactId>
 				<version>5.8.18</version>
 			</dependency>
+
+			<dependency>
+				<groupId>com.github.xiaoymin</groupId>
+				<artifactId>knife4j-openapi3-jakarta-spring-boot-starter</artifactId>
+				<version>4.3.0</version>
+			</dependency>
+
+			<!--JWT(Json Web Token)登录支持-->
+			<dependency>
+				<groupId>io.jsonwebtoken</groupId>
+				<artifactId>jjwt</artifactId>
+				<version>0.12.3</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 

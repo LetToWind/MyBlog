@@ -31,20 +31,9 @@ create table t_user(
                        salt varchar(20)
 
 );
-
+# 为了符合第二范式
 create table t_role_user(
     id bigint(20) not null primary key,
     role_id bigint(20) not null,
     user_id bigint(20) not null
-);
-
-create table t_permission(
-                             id bigint(20) not null primary key,
-                             permission_name varchar(20) not null,
-                             permission_desc varchar(200) not null,
-                             role_id bigint(20) not null,
-                             create_time datetime default current_timestamp,
-                             create_by varchar(20) not null,
-                             update_time datetime default current_timestamp,
-                             update_by varchar(20) not null
 );

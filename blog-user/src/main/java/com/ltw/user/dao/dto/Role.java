@@ -17,8 +17,6 @@ public class Role implements Serializable {
 
     private String roleDesc;
 
-    private List<Permission> permissionList;
-
     private Date createTime;
 
     private String createBy;

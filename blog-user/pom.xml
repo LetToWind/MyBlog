@@ -8,9 +8,9 @@
         <version>0.0.1-SNAPSHOT</version>
     </parent>
     <groupId>com.ltw</groupId>
-    <artifactId>blog-user</artifactId>
+    <artifactId>blog-blogUser</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>sso</name>
+    <name>blog-blogUser</name>
     <description>sso</description>
     <properties>
         <java.version>17</java.version>

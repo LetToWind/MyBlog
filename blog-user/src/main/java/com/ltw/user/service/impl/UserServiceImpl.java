@@ -1,49 +1,51 @@
 package com.ltw.user.service.impl;
 
-import com.baomidou.mybatisplus.core.conditions.Wrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import cn.hutool.core.collection.CollectionUtil;
 import com.baomidou.mybatisplus.core.toolkit.IdWorker;
-import com.baomidou.mybatisplus.extension.service.IService;
+import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.ltw.common.web.exception.BaseException;
-import com.ltw.user.dao.dto.User;
+import com.ltw.user.dao.dto.BlogUser;
+import com.ltw.user.dao.dto.Role;
+import com.ltw.user.dao.mapper.RoleMapper;
 import com.ltw.user.dao.mapper.UserMapper;
 import com.ltw.user.service.IUserService;
+import com.ltw.user.service.RoleService;
 import com.ltw.user.vo.SignUpInput;
-import com.ltw.user.vo.UserQuery;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.Optional;
-import java.util.function.Function;
+import java.util.HashSet;
+import java.util.Set;
 
 @Service
-public class UserServiceImpl implements IUserService, IService<User> {
+public class UserServiceImpl extends ServiceImpl<UserMapper, BlogUser> implements IUserService, UserDetailsService {
 
     @Autowired
     UserMapper userMapper;
 
-
-    @Override
-    public User queryUserByUserExample(UserQuery query) {
-       return null;
-    }
+    @Autowired
+    RoleService roleService;
 
     @Override
     public Integer signUp(SignUpInput signUpInput) {
 
-        User user = User.builder().build();
-        user.setId(IdWorker.getId());
-        user.setUsername(signUpInput.getUsername());
-        user.setPassword(signUpInput.getPassword());
-        return userMapper.insert(user);
+        BlogUser blogUser = BlogUser.builder().build();
+        blogUser.setId(IdWorker.getId());
+        blogUser.setUsername(signUpInput.getUsername());
+        blogUser.setPassword(signUpInput.getPassword());
+        return userMapper.insert(blogUser);
     }
 
     @Override
     public String login(SignUpInput signUpInput) {
-        User user = userMapper.selectByUsername(signUpInput.getUsername());
-        if(user != null && user.getPassword().equals(signUpInput.getPassword())) {
+        BlogUser blogUser = userMapper.selectByUsername(signUpInput.getUsername());
+        if(blogUser != null && blogUser.getPassword().equals(signUpInput.getPassword())) {
             return "OK";
         }
         else {
@@ -52,52 +54,14 @@ public class UserServiceImpl implements IUserService, IService<User> {
     }
 
     @Override
-    public boolean saveBatch(Collection<User> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdateBatch(Collection<User> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean updateBatchById(Collection<User> entityList, int batchSize) {
-        return false;
-    }
-
-    @Override
-    public boolean saveOrUpdate(User entity) {
-        return false;
-    }
-
-    @Override
-    public User getOne(Wrapper<User> queryWrapper, boolean throwEx) {
-        return null;
-    }
-
-    @Override
-    public Optional<User> getOneOpt(Wrapper<User> queryWrapper, boolean throwEx) {
-        return Optional.empty();
-    }
-
-    @Override
-    public Map<String, Object> getMap(Wrapper<User> queryWrapper) {
-        return null;
-    }
-
-    @Override
-    public <V> V getObj(Wrapper<User> queryWrapper, Function<? super Object, V> mapper) {
-        return null;
-    }
-
-    @Override
-    public BaseMapper<User> getBaseMapper() {
-        return null;
-    }
-
-    @Override
-    public Class<User> getEntityClass() {
-        return null;
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        BlogUser blogUser = userMapper.selectByUsername(username);
+        //此处简化开发，不再设置role -> permission，直接将role当做permission使用，当然，想实现前者也不难就是了
+        Role role = roleService.getById(blogUser.getRoleId());
+        return new User(
+                blogUser.getUsername(),
+                blogUser.getPassword(),
+                CollectionUtil.newHashSet(new SimpleGrantedAuthority(role.getRoleName()))
+        );
     }
 }

@@ -6,12 +6,11 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 @Data
 @TableName("t_user")
 @Builder
-public class User implements Serializable {
+public class BlogUser implements Serializable {
     private Long id;
 
     private String loginName;
@@ -29,7 +28,6 @@ public class User implements Serializable {
     private Long roleId;
 
     private String salt;
-
 
     private static final long serialVersionUID = 1L;
 
